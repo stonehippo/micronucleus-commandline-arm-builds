@@ -16,7 +16,7 @@ $ sudo apt install -y binutils libusb-dev
 
 ### Building the commandline tool
 
-To build `micronucleus` for `arm-linux-gnueabihf`:
+To build `micronucleus` for `arm-linux-gnueabihf` (32-bit for ARMv6/v7 on Raspberry Pi):
 
 ```
 $ git clone https://github.com/micronucleus/micronucleus.git
