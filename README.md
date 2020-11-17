@@ -7,7 +7,7 @@ This is an ARM build of version 2.04 of the [Micronucleus command line tool](htt
 ## How it was built
 
 ### Dependencies
-On Raspberry Pi OS, the only depencendies seem to be `binutils` and `libusb-dev`. The make sure you've got these:
+On Raspberry Pi OS Buster, the only depencendies seem to be `binutils` and `libusb-dev`. The make sure you've got these:
 
 ```
 $ sudo apt update 
