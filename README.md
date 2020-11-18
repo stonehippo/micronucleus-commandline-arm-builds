@@ -98,7 +98,7 @@ $ sudo apt install -y binutils libusb-dev
 On Ubuntu, there are a couple of addtional things to install:
 
 ```
-$ sudo apt install make gcc
+$ sudo apt install -y make gcc
 ```
 
 ### Building the commandline tool for Linux ARM
