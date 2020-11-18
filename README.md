@@ -88,11 +88,17 @@ I built the Linux ARM version of the tool on a Raspberry Pi 3 running Raspberry 
 
 ### Linux ARM Dependencies
 
-On Raspberry Pi OS Buster, the only dependencies seem to be `binutils` and `libusb-dev`. The make sure you've got these:
+On Rasperry Pi OS, the only dependencies seem to be `binutils` and `libusb-dev`. The make sure you've got these:
 
 ```
 $ sudo apt update 
 $ sudo apt install -y binutils libusb-dev
+```
+
+On Ubuntu, there are a couple of addtional things to install:
+
+```
+$ sudo apt install make gcc
 ```
 
 ### Building the commandline tool for Linux ARM
