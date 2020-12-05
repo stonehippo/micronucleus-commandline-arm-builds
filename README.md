@@ -8,6 +8,12 @@ I was trying to install the latest version of the excellent [ATTinyCode](https:/
 
 After looking around, I came across this [issue](https://github.com/SpenceKonde/ATTinyCore/issues/465). There was a lot of questions about the current version of the `micronucleus` CLI tool, and best to build it. Long story short, that's what I'm doing here.
 
+### Updated Makefile for static binaries
+
+To build `micronucleus` for better portability when using it as tooling with megaTinyCore, I've updated the Makefile to produce static binaries on all platforms. I've got these updates in [my mirconucleus fork](https://github.com/stonehippo/micronucleus). The only diff is in the Makefile, which I may PR upstream at some point. I'll try to keep my repo largely in line with the upstream.
+
+If you want to build for any platform below and not make the Makefile edits yourself, I recommend using my fork for now.
+
 ## What's here
 
 I've managed to build or borrow the latest version of the `micronucleus` CLI tool (version 2.04) for multiple platforms:
@@ -15,10 +21,10 @@ I've managed to build or borrow the latest version of the `micronucleus` CLI too
 - MacOS (64 bit)
 - ~Windows (32 bit + 64 bit)~
 - ~Windows (64 bit)~
-- ~Linux i686 (32 bit)~
-- ~Linux x86_64 (64 bit)~
+- Linux x32 (32 bit)
+- Linux x64 (64 bit)
 - Linux ARM v6/v7 (32 bit)
-- ~Linux ARM aarch (64 bit)~
+- Linux ARM aarch (64 bit)
 
 ## MacOS
 
@@ -80,7 +86,40 @@ TK
 
 ## Linux 32 bit/64 bit
 
-TK
+I built the Linux x32 and x64 binareis on DigitalOcean Droplets running Ubuntu 16.04 and 20.04, respectively.
+
+### Linux Dependencies
+
+At least on Ubuntu, I needed to install, the following to get things to compile:
+
+```
+$ sudo apt update
+$ sudo apt install -y build-essentials binutils libusb-dev
+```
+
+### Building the commandline tool for Linux
+
+This works fine:
+
+```
+$ git clone https://github.com/micronucleus/micronucleus.git
+$ cd micronucleus/commandline
+$ git checkout tags/2.04 -b 2.04-release
+$ make
+``
+
+For the most part, the standard build file is fine. The main problem is that it doesn't build a static binary with the current config. This might not normally be an issue, but since I'm building the binary to support tooling in megaTinyCore, avoiding having to install `libusb-dev` is a good thing. So, I updated the micronucleus build file like this:
+
+```diff
+index 050f205..cf4a607 100644                                                                                           --- a/commandline/Makefile                                                                                              +++ b/commandline/Makefile                                                                                              @@ -5,7 +5,7 @@ CC=gcc                                                                                                                                                                                                                           ifeq ($(shell uname), Linux)                                                                                                   USBFLAGS=$(shell libusb-config --cflags)                                                                        -       USBLIBS=$(shell libusb-config --libs)                                                                           +       USBLIBS= -static $(shell libusb-config --libs)                                                                          EXE_SUFFIX =                                                                                                            OSFLAG = -D LINUX                                                                                                else ifeq ($(shell uname), Darwin) 
+```
+
+After that, the build process was pretty much the normal one:
+
+```
+$ make clean && make
+```
+
 
 ## Linux ARM 32 bit/64 bit
 
@@ -95,10 +134,10 @@ $ sudo apt update
 $ sudo apt install -y binutils libusb-dev
 ```
 
-On Ubuntu, there are a couple of addtional things to install:
+On Ubuntu, you also need:
 
 ```
-$ sudo apt install -y make gcc
+$ sudo apt install -y build-essentials
 ```
 
 ### Building the commandline tool for Linux ARM
