@@ -4,7 +4,7 @@ Build of the Micronucleus command line tool for various platforms.
 
 ## Why this exists
 
-I was trying to install the latest version of the excellent [ATTinyCode](https://github.com/SpenceKonde/ATTinyCore) on my Raspberry Pi, and it failed due to the fact that as of version 1.4.0, ATTinycore depends on the [`micronucleus` command line](https://github.com/micronucleus/micronucleus/tree/master/commandline). Unfortunately, the build of the tool referenced is not only an old alpha build (version 2.0a4), it only had been built for Windows, MacOS, and i686/x86_64 Linux builds.
+I was trying to install the latest version of the excellent [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) on my Raspberry Pi, and it failed due to the fact that as of version 1.4.0, ATTinycore depends on the [`micronucleus` command line](https://github.com/micronucleus/micronucleus/tree/master/commandline). Unfortunately, the build of the tool referenced is not only an old alpha build (version 2.0a4), it only had been built for Windows, MacOS, and i686/x86_64 Linux builds.
 
 After looking around, I came across this [issue](https://github.com/SpenceKonde/ATTinyCore/issues/465). There was a lot of questions about the current version of the `micronucleus` CLI tool, and best to build it. Long story short, that's what I'm doing here.
 
