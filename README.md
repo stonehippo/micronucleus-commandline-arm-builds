@@ -10,7 +10,7 @@ After looking around, I came across this [issue](https://github.com/SpenceKonde/
 
 ### Updated Makefile for static binaries
 
-To build `micronucleus` for better portability when using it as tooling with megaTinyCore, I've updated the Makefile to produce static binaries on all platforms. I've got these updates in [my mirconucleus fork](https://github.com/stonehippo/micronucleus). The only diff is in the Makefile, which I may PR upstream at some point. I'll try to keep my repo largely in line with the upstream.
+To build `micronucleus` for better portability when using it as tooling with ATTinyCore, I've updated the Makefile to produce static binaries on all platforms. I've got these updates in [my mirconucleus fork](https://github.com/stonehippo/micronucleus). The only diff is in the Makefile, which I may PR upstream at some point. I'll try to keep my repo largely in line with the upstream.
 
 If you want to build for any platform below and not make the Makefile edits yourself, I recommend using my fork for now.
 
@@ -108,7 +108,7 @@ $ git checkout tags/2.04 -b 2.04-release
 $ make
 ``
 
-For the most part, the standard build file is fine. The main problem is that it doesn't build a static binary with the current config. This might not normally be an issue, but since I'm building the binary to support tooling in megaTinyCore, avoiding having to install `libusb-dev` is a good thing. So, I updated the micronucleus build file like this:
+For the most part, the standard build file is fine. The main problem is that it doesn't build a static binary with the current config. This might not normally be an issue, but since I'm building the binary to support tooling in ATTinyCore, avoiding having to install `libusb-dev` is a good thing. So, I updated the micronucleus build file like this:
 
 ```diff
 index 050f205..cf4a607 100644                                                                                           --- a/commandline/Makefile                                                                                              +++ b/commandline/Makefile                                                                                              @@ -5,7 +5,7 @@ CC=gcc                                                                                                                                                                                                                           ifeq ($(shell uname), Linux)                                                                                                   USBFLAGS=$(shell libusb-config --cflags)                                                                        -       USBLIBS=$(shell libusb-config --libs)                                                                           +       USBLIBS= -static $(shell libusb-config --libs)                                                                          EXE_SUFFIX =                                                                                                            OSFLAG = -D LINUX                                                                                                else ifeq ($(shell uname), Darwin) 
