@@ -86,7 +86,7 @@ TK
 
 ## Linux 32 bit/64 bit
 
-I built the Linux x32 and x64 binareis on DigitalOcean Droplets running Ubuntu 16.04 and 20.04, respectively.
+I built the Linux x32 and x64 binaries on DigitalOcean Droplets running Ubuntu 16.04 and 20.04, respectively.
 
 ### Linux Dependencies
 
@@ -106,7 +106,7 @@ $ git clone https://github.com/micronucleus/micronucleus.git
 $ cd micronucleus/commandline
 $ git checkout tags/2.04 -b 2.04-release
 $ make
-``
+```
 
 For the most part, the standard build file is fine. The main problem is that it doesn't build a static binary with the current config. This might not normally be an issue, but since I'm building the binary to support tooling in ATTinyCore, avoiding having to install `libusb-dev` is a good thing. So, I updated the micronucleus build file like this:
 
