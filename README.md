@@ -94,7 +94,7 @@ At least on Ubuntu, I needed to install, the following to get things to compile:
 
 ```
 $ sudo apt update
-$ sudo apt install -y build-essentials binutils libusb-dev
+$ sudo apt install -y build-essential binutils libusb-dev
 ```
 
 ### Building the commandline tool for Linux
@@ -137,7 +137,7 @@ $ sudo apt install -y binutils libusb-dev
 On Ubuntu, you also need:
 
 ```
-$ sudo apt install -y build-essentials
+$ sudo apt install -y build-essential
 ```
 
 ### Building the commandline tool for Linux ARM
